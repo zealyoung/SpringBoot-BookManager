@@ -1,12 +1,14 @@
 # SpringBoot-BookManager
 
-    这篇博客记录一下自己做一个Demo项目的全过程，写博客一方面督促自己，一方面可以让自己更熟悉流程和细节，项目资料是从Nowcoder上找的，项目的前端文件是直接使用了源项目文件，后端自己写了一遍。
-
+    这篇博客记录一下自己做一个Demo项目的全过程，写博客一方面督促自己，一方面可以让自己更熟悉流程和细节，项目
+    资料是从Nowcoder上找的，项目的前端文件是直接使用了源项目文件，后端自己写了一遍。
 # 项目简介
 ## 工程简介
-    项目利用Maven，利用SpringBoot作为项目主体框架（SpringBoot相比整合SSM少了很多配置，可以把精力放在代码开发和业务逻辑上，其本质还是SSM），项目使用Freemaker、Web、MyBatis、Aspect四个模块。
+    项目利用Maven，利用SpringBoot作为项目主体框架（SpringBoot相比整合SSM少了很多配置，可以把精力放在代码
+    开发和业务逻辑上，其本质还是SSM），项目使用Freemaker、Web、MyBatis、Aspect四个模块。
 ## 内容简介
-    项目实现图书管理，主要包含注册、登录、向书库中添加书目、借书、还书等操作，通过MD5加密算法对用户密码进行加密，通过cookie与ticket进行登录权限验证。
+    项目实现图书管理，主要包含注册、登录、向书库中添加书目、借书、还书等操作，通过MD5加密算法对用户密码进
+    行加密，通过cookie与ticket进行登录权限验证。
 # 项目流程
 ## 项目创建方式
 * 在https://start.spring.io/ 挑选模块之后下载到本地，用IDE打开
@@ -20,6 +22,7 @@
 * model 各种数据模型，对数据的描述
 * service 一般用作对dao层的封装
 * utils 工具包，一般都是静态方法。
+
 ## 创建数据库
 ```sql
 create database bookmanager
@@ -29,11 +32,15 @@ create database bookmanager
 ### 创建图书实体类Book.java
     描述图书的基本属性，对应数据库表，写入Getter和Setter方法
 ### 创建图书的DAO层BookDAO.java
-    DAO层就是利用具体SQL实现CRUD，也是常说的Mapper，因为项目是Mybatis作为持久层框架的，所以可以选择写相应Xml完成映射，或直接用注解，本项目采用的是注解方法（个人感觉能用注解的时候都用注解，很清晰）
+    DAO层就是利用具体SQL实现CRUD，也是常说的Mapper，因为项目是Mybatis作为持久层框架的，所以可以选择写相应
+    Xml完成映射，或直接用注解，本项目采用的是注解方法（个人感觉能用注解的时候都用注解，很清晰）
 ### 创建BookService.java
-    这里的Service层就是对Controller层和Model层的解耦，通用的业务逻辑实现应该在Service层中，如果去掉这一层其实也可以运行，我们直接在Controller层中实现业务逻辑，并直接调用持久层(也就是DAO层)实现数据库操作，也可以完成相应内容，但代码的耦合度就变得很高。在本项目中主要是对DAO进行封装。
+    这里的Service层就是对Controller层和Model层的解耦，通用的业务逻辑实现应该在Service层中，如果去掉这一层
+    其实也可以运行，我们直接在Controller层中实现业务逻辑，并直接调用持久层(也就是DAO层)实现数据库操作，也
+    可以完成相应内容，但代码的耦合度就变得很高。在本项目中主要是对DAO进行封装。
 ### 创建BookController.java
-    Controller也就是MVC中的C，这时候的Controller还不完整，只是先出一个运行效果，可以访问主页，代码也只有下面几行。
+    Controller也就是MVC中的C，这时候的Controller还不完整，只是先出一个运行效果，可以访问主页，代码也只有
+    下面几行。
 ```Java
 @Controller
 public class BookController {
@@ -65,6 +72,7 @@ public class BookController {
     根据需求对DAO层进行封装
 ## 完成工具类
     这部分跟着源项目学习了一下，下面贴一下源项目的介绍。
+
 **MD5.java**
 
 这个类就是用来加密的。服务器不保存用户的明文密码是一项基本常识，所以我们用MD5来加密。这里也不要专注于MD5的具体实现方法，这不是我们的主要任务，但建议你至少要知道MD5常用在什么地方，并知道这个加密是不可逆的就可以了。
